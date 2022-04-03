@@ -8,17 +8,17 @@ const projects = () => {
     const projectsList = [
         {
             name: 'project #1',
-            number: 'abc123',
+            number: 'abd123',
             owner: 'Nicholas Peters',
         },
         {
             name: 'project #2',
-            number: 'abc123',
+            number: 'def456',
             owner: 'Nicholas Peters',
         },
         {
             name: 'project #3',
-            number: 'abc123',
+            number: 'ghi789',
             owner: 'Nicholas Peters',
         },
     ]
@@ -29,7 +29,7 @@ const projects = () => {
             <PrimaryButton buttonMargin='0 auto 20px auto'>Add Project +</PrimaryButton>
             <ProjectCardContainer>
                 {projectsList.map((project) => {
-                    return <ProjectCard {...project}/>
+                    return <ProjectCard key={project.number} {...project}/>
                 })}
             </ProjectCardContainer>
         </PageContainer>
