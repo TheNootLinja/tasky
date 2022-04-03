@@ -1,8 +1,10 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { useRouter } from 'next/router'
+
+import PrimaryButton from '../components/PrimaryButton'
 
 export default function Home() {
+  const router = useRouter();
   return (
     <div className="">
       <Head>
@@ -13,9 +15,8 @@ export default function Home() {
       <main className="flex justify-center items-center h-screen">
         <div className="flex flex-col">
           <h1 className="text-center text-5xl mb-5 font-bold">tasky</h1>
-          <img className="w-screen" src="/assets/svgs/green-line.svg" alt="" />
-          <button className="mb-7 m-auto bg-[#5E3CF5] text-white h-14 w-80 rounded-full shadow-lg shadow-slate-900/30">Sign In</button>
-          <button className="m-auto bg-[#5E3CF5] text-white h-14 w-80 rounded-full shadow-lg shadow-slate-900/30">Sign In With Google</button>
+          <img className="w-screen mb-8" src="/assets/svgs/green-line.svg" alt="" />
+          <PrimaryButton buttonMargin='0 auto 30px auto'>Sign In</PrimaryButton>
         </div>
       </main>
     </div>
