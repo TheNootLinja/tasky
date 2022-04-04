@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
-const PrimaryButton = ({buttonMargin='auto', href = null, children}) => {
+const PrimaryButton = ({buttonMargin='auto', href = null, children, clickFunc}) => {
     return ( 
-        <StyledButton buttonMargin={buttonMargin}>{children}</StyledButton >
+        <StyledButton onClick={clickFunc} buttonMargin={buttonMargin}>{children}</StyledButton >
      );
 }
  
