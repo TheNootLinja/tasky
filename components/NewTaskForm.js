@@ -41,6 +41,13 @@ const NewTaskForm = () => {
                 <option value="Feature Request">Feature Request</option>
               </StyledSelect>
             </FieldContainer>
+            <FieldContainer>
+              <StyledSelect onChange={() => console.log('something')} name="" id="">
+                <option value="">Select </option>
+                <option value="Bug">Bug</option>
+                <option value="Feature Request">Feature Request</option>
+              </StyledSelect>
+            </FieldContainer>
           </Form>
         </NewTaskFormContainer>
      );
