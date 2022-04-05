@@ -1,7 +1,8 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 import PrimaryButton from "../components/PrimaryButton";
 import ProjectCard from '../components/ProjectCard';
+import NewTaskForm from '../components/NewTaskForm';
 
 import { connectToDatabase } from '../lib/mongodb';
 
@@ -22,6 +23,7 @@ const tasks = ({ tasks }) => {
         <PageContainer>
             <h1>Tasks</h1>
             <PrimaryButton clickFunc={addTask}>New Task</PrimaryButton>
+            <NewTaskForm />
             {tasks.map(task => {
                 return <li key={task._id}>{task.task_name}</li>
             })}
@@ -32,7 +34,7 @@ const tasks = ({ tasks }) => {
 export default tasks;
 
 const PageContainer = styled.div`
-    width: 100%;
+    width: fit-content;
     height: 100vh;
 `;
 
