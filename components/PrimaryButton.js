@@ -12,7 +12,8 @@ const StyledButton = styled.button`
     background-color: #5E3CF5;
     color: white;
     height: 3.5rem;
-    width: 358px;
+    width: 100%;
+    max-width: 358px;
     margin: ${props => props.buttonMargin};
     border-radius: 500px;
     display: block;
