@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import PrimaryButton from './PrimaryButton';
 
-const NewTaskForm = () => {
+const NewTaskForm = ({ closeForm }) => {
   const optionLists = [
     {
       name: "bug-list",
@@ -21,7 +21,6 @@ const NewTaskForm = () => {
 
     return ( 
         <NewTaskFormContainer>
-          {/* <p>{selectedType}</p> */}
           <Form>
             <FieldContainer>
               <TextInput placeholder="Task Name" id="task-name"/>
@@ -46,7 +45,7 @@ const NewTaskForm = () => {
             </FieldContainer>
             <ButtonContainer>
               <PrimaryButton>Create</PrimaryButton>
-              <PrimaryButton>Cancel</PrimaryButton>
+              <PrimaryButton clickFunc={closeForm}>Cancel</PrimaryButton>
             </ButtonContainer>
           </Form>
         </NewTaskFormContainer>
@@ -68,6 +67,9 @@ const Form = styled.fieldset`
   gap: 10px;
   margin: 0 auto;
   width: 300px;
+  :first-child {
+    margin-top: 20px;
+  }
 `;
 
 const FieldContainer = styled.div`
