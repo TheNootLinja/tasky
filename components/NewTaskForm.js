@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import PrimaryButton from './PrimaryButton';
+
 const NewTaskForm = () => {
   const optionLists = [
     {
@@ -12,27 +14,20 @@ const NewTaskForm = () => {
     },
   ];
 
-  let selectedType='bug';
 
   const updateType = (e) => {
-    console.log()
+
   }
 
     return ( 
         <NewTaskFormContainer>
-          <p>{selectedType}</p>
+          {/* <p>{selectedType}</p> */}
           <Form>
             <FieldContainer>
               <TextInput placeholder="Task Name" id="task-name"/>
             </FieldContainer>
             <FieldContainer>
               <StyledTextArea placeholder="Description" id="task-description"/>
-            </FieldContainer>
-            <FieldContainer>
-                <StyledRadio onChange={updateType} type="radio" id="bug" name="task-type" value="bug"/>
-                <StyledRadio onChange={updateType} type="radio" id="feature" name="task-type" value="feature"/>
-            </FieldContainer>
-            <FieldContainer>
             </FieldContainer>
             <FieldContainer>
               <StyledSelect onChange={() => console.log('something')} name="" id="">
@@ -43,11 +38,16 @@ const NewTaskForm = () => {
             </FieldContainer>
             <FieldContainer>
               <StyledSelect onChange={() => console.log('something')} name="" id="">
-                <option value="">Select </option>
-                <option value="Bug">Bug</option>
-                <option value="Feature Request">Feature Request</option>
+                <option value="">Select Bug Category</option>
+                <option value="UI">UI</option>
+                <option value="Functionality">Functionality</option>
+                <option value="Accessibility">Accessibility</option>
               </StyledSelect>
             </FieldContainer>
+            <ButtonContainer>
+              <PrimaryButton>Create</PrimaryButton>
+              <PrimaryButton>Cancel</PrimaryButton>
+            </ButtonContainer>
           </Form>
         </NewTaskFormContainer>
      );
@@ -67,11 +67,17 @@ const Form = styled.fieldset`
   justify-content: center;
   gap: 10px;
   margin: 0 auto;
+  width: 300px;
 `;
 
 const FieldContainer = styled.div`
   width: 300px;
   height: fit-content;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 10px;
 `;
 
 const StyledLabel = styled.label`
