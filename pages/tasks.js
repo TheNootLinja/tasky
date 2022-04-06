@@ -16,7 +16,6 @@ const tasks = ({ tasks }) => {
     // Function that hits the endpoint for creating tasks
     const addTask = () => {
       setShowTaskForm(!showTaskForm);
-      console.log(showTaskForm);
       // fetch('http://localhost:3000/api/createTask', {
       //   method: "POST",
       //   body: JSON.stringify({
@@ -24,17 +23,23 @@ const tasks = ({ tasks }) => {
       //     author_name: 'Nicholas Peters',
       //   }),
       // });
+    };
+
+    const closeForm = () => {
+        setShowTaskForm(false);
     }
 
 
     return ( 
         <PageContainer>
             <h1>Tasks</h1>
-            <PrimaryButton clickFunc={addTask}>New Task</PrimaryButton>
-            { showTaskForm ? <NewTaskForm /> : null }
-            {tasks.map(task => {
-                return <li key={task._id}>{task.task_name}</li>
-            })}
+            { !showTaskForm ? <PrimaryButton clickFunc={addTask}>New Task</PrimaryButton> : null }
+            { showTaskForm ? <NewTaskForm closeForm={closeForm} /> : null }
+            <TaskList>
+                {tasks.map(task => {
+                    return <li key={task._id}>{task.task_name}</li>
+                })}
+            </TaskList>
         </PageContainer>
      );
 }
@@ -44,6 +49,10 @@ export default tasks;
 const PageContainer = styled.div`
     width: fit-content;
     height: 100vh;
+`;
+
+const TaskList = styled.ul`
+    margin-top: 20px;
 `;
 
 const ProjectCardContainer = styled.div`
