@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { useState } from 'react';
+
 import PrimaryButton from "../components/PrimaryButton";
 import ProjectCard from '../components/ProjectCard';
 import NewTaskForm from '../components/NewTaskForm';
@@ -7,23 +9,29 @@ import NewTaskForm from '../components/NewTaskForm';
 import { connectToDatabase } from '../lib/mongodb';
 
 const tasks = ({ tasks }) => {
+    
+    const [showTaskForm, setShowTaskForm] = useState(false);
 
     const taskList = [];
     // Function that hits the endpoint for creating tasks
     const addTask = () => {
-      fetch('http://localhost:3000/api/createTask', {
-        method: "POST",
-        body: JSON.stringify({
-          task_name: 'testing task name',
-          author_name: 'Nicholas Peters',
-        }),
-      });
+      setShowTaskForm(!showTaskForm);
+      console.log(showTaskForm);
+      // fetch('http://localhost:3000/api/createTask', {
+      //   method: "POST",
+      //   body: JSON.stringify({
+      //     task_name: 'testing task name',
+      //     author_name: 'Nicholas Peters',
+      //   }),
+      // });
     }
+
+
     return ( 
         <PageContainer>
             <h1>Tasks</h1>
             <PrimaryButton clickFunc={addTask}>New Task</PrimaryButton>
-            <NewTaskForm />
+            { showTaskForm ? <NewTaskForm /> : null }
             {tasks.map(task => {
                 return <li key={task._id}>{task.task_name}</li>
             })}
