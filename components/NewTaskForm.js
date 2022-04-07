@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import PrimaryButton from './PrimaryButton';
+import TextInput from './TextInput.js'
 
 const NewTaskForm = ({ closeForm, taskFormState, handleFormState, createTask}) => {
   const optionLists = [
@@ -18,12 +19,14 @@ const NewTaskForm = ({ closeForm, taskFormState, handleFormState, createTask}) =
 
   }
 
+  const handleButton = () => {
+    console.log('Clicked')
+  }
+
     return ( 
         <NewTaskFormContainer>
           <Form>
-            <FieldContainer>
-              <TextInput onChange={(e) => handleFormState(e, 'taskName')} defaultValue={taskFormState.taskName} placeholder="Task Name" id="task-name"/>
-            </FieldContainer>
+            <TextInput clickFunc={handleFormState} defVal={taskFormState.taskName} placHol={"Task Name"}/>
             <FieldContainer>
               <StyledTextArea onChange={(e) => handleFormState(e, 'taskDescription')} placeholder="Task Description" defaultValue={taskFormState.taskDescription} id="task-description"/>
             </FieldContainer>
@@ -86,24 +89,6 @@ const StyledLabel = styled.label`
   margin: auto;
 `;
 
-const TextInput = styled.input`
-  /* border: 1px solid rgba(225,225,225,1); */
-  /* background-color: rgba(52,57,80,1); */
-  background-color: #525a7c;
-  box-shadow: 0 4px 10px rgba(0,0,0,.15);
-  -webkit-appearance: none;
-  width: 100%;
-  height: 40px;
-  margin: 0 auto;
-  padding-left: 10px;
-  border-radius: 5px;
-  caret-color: #fff;
-  color: #ffffff;
-  ::placeholder {
-    color: #b3b3b3;
-  }
-`;
-
 const StyledTextArea = styled.textarea`
   /* border: 1px solid rgba(225,225,225,1); */
   -webkit-appearance: none;
@@ -132,7 +117,7 @@ const StyledSelect = styled.select`
   padding-left: 10px;
   border-radius: 5px;
   color: #fff;
-  &:first-child {
+  /* &:first-child {
     color: #b3b3b3;
-  }
+  } */
 `;
