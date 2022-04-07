@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import PrimaryButton from './PrimaryButton';
 
-const NewTaskForm = ({ closeForm }) => {
+const NewTaskForm = ({ closeForm, taskFormState, handleFormState, createTask}) => {
   const optionLists = [
     {
       name: "bug-list",
@@ -14,7 +14,6 @@ const NewTaskForm = ({ closeForm }) => {
     },
   ];
 
-
   const updateType = (e) => {
 
   }
@@ -23,20 +22,20 @@ const NewTaskForm = ({ closeForm }) => {
         <NewTaskFormContainer>
           <Form>
             <FieldContainer>
-              <TextInput placeholder="Task Name" id="task-name"/>
+              <TextInput onChange={(e) => handleFormState(e, 'taskName')} defaultValue={taskFormState.taskName} placeholder="Task Name" id="task-name"/>
             </FieldContainer>
             <FieldContainer>
-              <StyledTextArea placeholder="Description" id="task-description"/>
+              <StyledTextArea onChange={(e) => handleFormState(e, 'taskDescription')} placeholder="Task Description" defaultValue={taskFormState.taskDescription} id="task-description"/>
             </FieldContainer>
             <FieldContainer>
-              <StyledSelect onChange={() => console.log('something')} name="" id="">
+              <StyledSelect onChange={(e) => handleFormState(e, 'taskType')} name="" id="">
                 <option value="">Select Category</option>
                 <option value="Bug">Bug</option>
                 <option value="Feature Request">Feature Request</option>
               </StyledSelect>
             </FieldContainer>
             <FieldContainer>
-              <StyledSelect onChange={() => console.log('something')} name="" id="">
+              <StyledSelect onChange={(e) => handleFormState(e, 'taskCategory')} name="" id="">
                 <option value="">Select Bug Category</option>
                 <option value="UI">UI</option>
                 <option value="Functionality">Functionality</option>
@@ -44,7 +43,7 @@ const NewTaskForm = ({ closeForm }) => {
               </StyledSelect>
             </FieldContainer>
             <ButtonContainer>
-              <PrimaryButton>Create</PrimaryButton>
+              <PrimaryButton clickFunc={createTask}>Create</PrimaryButton>
               <PrimaryButton clickFunc={closeForm}>Cancel</PrimaryButton>
             </ButtonContainer>
           </Form>

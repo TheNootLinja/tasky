@@ -9,8 +9,17 @@ import NewTaskForm from '../components/NewTaskForm';
 import { connectToDatabase } from '../lib/mongodb';
 
 const tasks = ({ tasks }) => {
+
+    const defaultFormState = {
+        taskName: '',
+        taskDescription: '',
+        taskAuthorName: '',
+        taskType: '',
+        taskCategory: '',
+    }
     
     const [showTaskForm, setShowTaskForm] = useState(false);
+    const [taskFormState, setTaskFormState] = useState(defaultFormState);
 
     const taskList = [];
     // Function that hits the endpoint for creating tasks
@@ -25,6 +34,18 @@ const tasks = ({ tasks }) => {
       // });
     };
 
+    const handleFormState = (e, type) => {
+        setTaskFormState({
+            ...taskFormState,
+            [type]: e.target.value}
+            );
+        console.log(taskFormState[type]);
+    }
+
+    const handleCreateTask = () => {
+        console.log(taskFormState);
+    }
+
     const closeForm = () => {
         setShowTaskForm(false);
     }
@@ -32,9 +53,9 @@ const tasks = ({ tasks }) => {
 
     return ( 
         <PageContainer>
-            <h1>Tasks</h1>
+            <h1>tracky</h1>
             { !showTaskForm ? <PrimaryButton clickFunc={addTask}>New Task</PrimaryButton> : null }
-            { showTaskForm ? <NewTaskForm closeForm={closeForm} /> : null }
+            { showTaskForm ? <NewTaskForm createTask={handleCreateTask} handleFormState={handleFormState} taskFormState={taskFormState} closeForm={closeForm} /> : null }
             <TaskList>
                 {tasks.map(task => {
                     return <li key={task._id}>{task.task_name}</li>
