@@ -24,26 +24,30 @@ const tasks = ({ tasks }) => {
     const taskList = [];
     // Function that hits the endpoint for creating tasks
     const addTask = () => {
-      setShowTaskForm(!showTaskForm);
-      // fetch('http://localhost:3000/api/createTask', {
-      //   method: "POST",
-      //   body: JSON.stringify({
-      //     task_name: 'testing task name',
-      //     author_name: 'Nicholas Peters',
-      //   }),
-      // });
+      setShowTaskForm(false);
+      console.log(taskFormState)
+      fetch('http://localhost:3000/api/createTask', {
+        method: "POST",
+        body: JSON.stringify({
+          task_name: taskFormState.taskName,
+          task_description: taskFormState.taskDescription,
+          author_name: 'Nicholas Peters',
+          created_date: new Date(),
+          task_type: taskFormState.taskType,
+          task_category: taskFormState.taskCategory,
+        }),
+      });
     };
+
+    const openTaskForm = () => {
+      setShowTaskForm(true)
+    }
 
     const handleFormState = (e, type) => {
         setTaskFormState({
             ...taskFormState,
             [type]: e.target.value}
-            );
-        console.log(taskFormState[type]);
-    }
-
-    const handleCreateTask = () => {
-        console.log(taskFormState);
+        );
     }
 
     const closeForm = () => {
@@ -54,8 +58,8 @@ const tasks = ({ tasks }) => {
     return ( 
         <PageContainer>
             <h1>tracky</h1>
-            { !showTaskForm ? <PrimaryButton clickFunc={addTask}>New Task</PrimaryButton> : null }
-            { showTaskForm ? <NewTaskForm createTask={handleCreateTask} handleFormState={handleFormState} taskFormState={taskFormState} closeForm={closeForm} /> : null }
+            { !showTaskForm ? <PrimaryButton clickFunc={openTaskForm}>New Task</PrimaryButton> : null }
+            { showTaskForm ? <NewTaskForm createTask={addTask} handleFormState={handleFormState} taskFormState={taskFormState} closeForm={closeForm} /> : null }
             <TaskList>
                 {tasks.map(task => {
                     return <li key={task._id}>{task.task_name}</li>
@@ -68,7 +72,7 @@ const tasks = ({ tasks }) => {
 export default tasks;
 
 const PageContainer = styled.div`
-    width: fit-content;
+    width: 100%;
     height: 100vh;
 `;
 

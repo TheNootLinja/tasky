@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import PrimaryButton from './PrimaryButton';
+import PrimaryButton from './PrimaryButton'
 import TextInput from './TextInput.js'
+import TextArea from './TextArea'
 
 const NewTaskForm = ({ closeForm, taskFormState, handleFormState, createTask}) => {
   const optionLists = [
@@ -27,9 +28,7 @@ const NewTaskForm = ({ closeForm, taskFormState, handleFormState, createTask}) =
         <NewTaskFormContainer>
           <Form>
             <TextInput clickFunc={handleFormState} defVal={taskFormState.taskName} placHol={"Task Name"}/>
-            <FieldContainer>
-              <StyledTextArea onChange={(e) => handleFormState(e, 'taskDescription')} placeholder="Task Description" defaultValue={taskFormState.taskDescription} id="task-description"/>
-            </FieldContainer>
+            <TextArea clickFunc={handleFormState} defVal={taskFormState.taskDescription} placHol={"Task Description"} id="tasl-description"/>
             <FieldContainer>
               <StyledSelect onChange={(e) => handleFormState(e, 'taskType')} name="" id="">
                 <option value="">Select Category</option>
