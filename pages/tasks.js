@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useState } from 'react';
 
 import PrimaryButton from "../components/PrimaryButton";
-import ProjectCard from '../components/ProjectCard';
 import NewTaskForm from '../components/NewTaskForm';
 
 import { connectToDatabase } from '../lib/mongodb';
@@ -20,27 +19,38 @@ const tasks = ({ tasks }) => {
     
     const [showTaskForm, setShowTaskForm] = useState(false);
     const [taskFormState, setTaskFormState] = useState(defaultFormState);
+    const [taskArr, setTaskArr] = useState(tasks);
 
-    const taskList = [];
     // Function that hits the endpoint for creating tasks
-    const addTask = () => {
+    const addTask = async () => {
       setShowTaskForm(false);
       console.log(taskFormState)
-      fetch('http://localhost:3000/api/createTask', {
+      const res = await fetch('http://localhost:3000/api/createTask', {
         method: "POST",
         body: JSON.stringify({
-          task_name: taskFormState.taskName,
-          task_description: taskFormState.taskDescription,
-          author_name: 'Nicholas Peters',
-          created_date: new Date(),
-          task_type: taskFormState.taskType,
-          task_category: taskFormState.taskCategory,
+            task_name: taskFormState.taskName,
+            task_description: taskFormState.taskDescription,
+            author_name: 'Nicholas Peters',
+            created_date: new Date(),
+            task_type: taskFormState.taskType,
+            task_category: taskFormState.taskCategory,
         }),
       });
+      const data = await res.json()
+      const newTask = {
+        task_name: taskFormState.taskName,
+        task_description: taskFormState.taskDescription,
+        author_name: 'Nicholas Peters',
+        created_date: new Date(),
+        task_type: taskFormState.taskType,
+        task_category: taskFormState.taskCategory,
+        _id: data.taskID
+      }
+      setTaskArr(taskArr => [...taskArr, newTask])
     };
 
     const openTaskForm = () => {
-      setShowTaskForm(true)
+      setShowTaskForm(true);
     }
 
     const handleFormState = (e, type) => {
@@ -61,8 +71,8 @@ const tasks = ({ tasks }) => {
             { !showTaskForm ? <PrimaryButton clickFunc={openTaskForm}>New Task</PrimaryButton> : null }
             { showTaskForm ? <NewTaskForm createTask={addTask} handleFormState={handleFormState} taskFormState={taskFormState} closeForm={closeForm} /> : null }
             <TaskList>
-                {tasks.map(task => {
-                    return <li key={task._id}>{task.task_name}</li>
+                {taskArr.map(task => {
+                    return <li key={Math.random()}>{task.task_name}</li>
                 })}
             </TaskList>
         </PageContainer>
