@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-const ProjectCard = ({name, owner}) => {
+const ProjectCard = (project) => {
     return ( 
         <ProjectCardContainer>
-            <p>{name}</p>
-            <p>{owner}</p>
+            <p>{project.projectName}</p>
+            <p>{project.authorName}</p>
         </ProjectCardContainer>
      );
 }
