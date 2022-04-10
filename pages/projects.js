@@ -51,6 +51,7 @@ const projects = ({projects}) => {
           _id: data.projectID,
         }
         setProjectsArr(projectsArr => [...projectsArr, newProject])
+        setProjectFormState(defaultFormState)
       };
 
     return ( 
