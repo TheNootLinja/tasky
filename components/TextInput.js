@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
-const TextInput = ({ clickFunc, defVal, placHol }) => {
+const TextInput = ({ clickFunc, defVal, placHol, type }) => {
     return ( 
         <FieldContainer>
-            <StyledTextInput type="text" onChange={(e) => clickFunc(e, 'taskName')} defaultValue={defVal} placeholder={placHol}/>
+            <StyledTextInput type="text" onChange={(e) => clickFunc(e, type)} defaultValue={defVal} placeholder={placHol}/>
         </FieldContainer>
      );
 }

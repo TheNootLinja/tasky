@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
-const TextArea = ({ clickFunc, defVal, placHol }) => {
+const TextArea = ({ clickFunc, defVal, placHol, type }) => {
     return (
         <FieldContainer>
-            <StyledTextArea onChange={(e) => clickFunc(e, 'taskDescription')} placeholder={placHol} defaultValue={defVal} name="" id="" cols="30" rows="10" />
+            <StyledTextArea onChange={(e) => clickFunc(e, type)} placeholder={placHol} defaultValue={defVal} name="" id="" cols="30" rows="10" />
         </FieldContainer>
      );
 }
