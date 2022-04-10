@@ -54,17 +54,17 @@ const tasks = ({ tasks }) => {
       setShowTaskForm(true);
     }
 
+    const closeForm = () => {
+        setShowTaskForm(false);
+        setTaskFormState(defaultFormState);
+    }
+
     const handleFormState = (e, type) => {
         setTaskFormState({
             ...taskFormState,
             [type]: e.target.value}
         );
     }
-
-    const closeForm = () => {
-        setShowTaskForm(false);
-    }
-
 
     return ( 
         <PageContainer>
