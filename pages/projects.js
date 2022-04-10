@@ -12,9 +12,12 @@ const projects = ({projects}) => {
     const defaultFormState = {
         projectName: '',
         projectDescription: '',
+        authorName: '',
+        createdDate: null,
     }
 
     const [showForm, setShowForm] = useState(false);
+    const [projectsArr, setProjectsArr] = useState(projects);
     const [projectFormState, setProjectFormState] = useState(defaultFormState);
 
     const handleFormState = (e, type) => {
@@ -28,15 +31,34 @@ const projects = ({projects}) => {
         setShowForm(!showForm);
     }
 
-
-    const projectsList = projects;
+    const addProject = async () => {
+        setShowForm(false);
+        const res = await fetch('http://localhost:3000/api/createProject', {
+          method: "POST",
+          body: JSON.stringify({
+              projectName: projectFormState.projectName,
+              projectDescription: projectFormState.projectDescription,
+              authorName: 'Nicholas Peters',
+              createdDate: new Date()
+          }),
+        });
+        const data = await res.json()
+        const newProject = {
+          projectName: projectFormState.projectName,
+          projectDescription: projectFormState.projectDescription,
+          authorName: 'Nicholas Peters',
+          created_date: new Date(),
+          _id: data.projectID,
+        }
+        setProjectsArr(projectsArr => [...projectsArr, newProject])
+      };
 
     return ( 
         <PageContainer>
             <h1>Projects</h1>
-            {showForm ? <NewProjectForm closeForm={handleFormVisible}/> : <PrimaryButton clickFunc={handleFormVisible} buttonMargin='0 auto 20px auto'>Add Project +</PrimaryButton>}
+            {showForm ? <NewProjectForm projectFormState={projectFormState} addProject={addProject} closeForm={handleFormVisible} handleFormState={handleFormState}/> : <PrimaryButton clickFunc={handleFormVisible} buttonMargin='0 auto 20px auto'>Add Project +</PrimaryButton>}
             <ProjectCardContainer>
-                {projectsList.map((project) => {
+                {projectsArr.map((project) => {
                     return <ProjectCard key={project._id} {...project}/>
                 })}
             </ProjectCardContainer>
