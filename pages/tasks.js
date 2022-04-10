@@ -47,6 +47,7 @@ const tasks = ({ tasks }) => {
         _id: data.taskID
       }
       setTaskArr(taskArr => [...taskArr, newTask])
+      setTaskFormState(defaultFormState)
     };
 
     const openTaskForm = () => {
