@@ -31,14 +31,14 @@ const NewTaskForm = ({ closeForm, taskFormState, handleFormState, createTask}) =
             <TextArea clickFunc={handleFormState} defVal={taskFormState.taskDescription} type="taskDescription" placHol={"Task Description"} id="tasl-description"/>
             <FieldContainer>
               <StyledSelect onChange={(e) => handleFormState(e, 'taskType')} name="" id="">
-                <option value="" disabled selected hidden>Select Category</option>
+                <option value="" defaultValue hidden>Select Category</option>
                 <option value="Bug">Bug</option>
                 <option value="Feature Request">Feature Request</option>
               </StyledSelect>
             </FieldContainer>
             <FieldContainer>
               <StyledSelect onChange={(e) => handleFormState(e, 'taskCategory')} name="" id="">
-                <option value="" disabled selected hidden>Select Bug Category</option>
+                <option value="" defaultValue hidden>Select Bug Category</option>
                 <option value="UI">UI</option>
                 <option value="Functionality">Functionality</option>
                 <option value="Accessibility">Accessibility</option>
