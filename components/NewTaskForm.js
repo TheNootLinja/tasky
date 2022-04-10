@@ -27,8 +27,8 @@ const NewTaskForm = ({ closeForm, taskFormState, handleFormState, createTask}) =
     return ( 
         <NewTaskFormContainer>
           <Form>
-            <TextInput clickFunc={handleFormState} defVal={taskFormState.taskName} placHol={"Task Name"}/>
-            <TextArea clickFunc={handleFormState} defVal={taskFormState.taskDescription} placHol={"Task Description"} id="tasl-description"/>
+            <TextInput clickFunc={handleFormState} defVal={taskFormState.taskName} type="taskName" placHol={"Task Name"}/>
+            <TextArea clickFunc={handleFormState} defVal={taskFormState.taskDescription} type="taskDescription" placHol={"Task Description"} id="tasl-description"/>
             <FieldContainer>
               <StyledSelect onChange={(e) => handleFormState(e, 'taskType')} name="" id="">
                 <option value="" disabled selected hidden>Select Category</option>
