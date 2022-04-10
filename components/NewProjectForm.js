@@ -4,14 +4,14 @@ import TextInput from './TextInput.js'
 import TextArea from './TextArea'
 import PrimaryButton from './PrimaryButton.js'
 
-const NewProjectForm = ({closeForm}) => {
+const NewProjectForm = ({closeForm, addProject, handleFormState, projectFormState}) => {
   return ( 
       <NewProjectFormContainer>
           <StyledForm>
-          <TextInput placHol='Project Name'/>
-          <TextArea placHol='Project Description'/>
+          <TextInput clickFunc={handleFormState} defVal={projectFormState.projectName} type='projectName' placHol='Project Name'/>
+          <TextArea clickFunc={handleFormState} defVal={projectFormState.projectDescription} type='projectDescription' placHol='Project Description'/>
           <ButtonContainer>
-            <PrimaryButton>Create</PrimaryButton>
+            <PrimaryButton clickFunc={addProject}>Create</PrimaryButton>
             <PrimaryButton clickFunc={closeForm}>Cancel</PrimaryButton>
           </ButtonContainer>
         </StyledForm>
