@@ -89,7 +89,6 @@ const StyledLabel = styled.label`
 `;
 
 const StyledTextArea = styled.textarea`
-  /* border: 1px solid rgba(225,225,225,1); */
   -webkit-appearance: none;
   background-color: #525a7c;
   box-shadow: 0 4px 10px rgba(0,0,0,.15);
@@ -116,7 +115,4 @@ const StyledSelect = styled.select`
   padding-left: 10px;
   border-radius: 5px;
   color: #fff;
-  /* &:first-child {
-    color: #b3b3b3;
-  } */
 `;
