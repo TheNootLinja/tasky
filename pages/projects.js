@@ -80,7 +80,7 @@ export async function getServerSideProps(context){
 
 const PageContainer = styled.div`
     width: 100%;
-    height: 100vh;
+    /* height: 100vh; */
 `;
 
 const ProjectCardContainer = styled.div`
