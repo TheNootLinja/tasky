@@ -57,7 +57,8 @@ const projects = ({projects}) => {
     return ( 
         <PageContainer>
             <h1>Projects</h1>
-            {showForm ? <NewProjectForm projectFormState={projectFormState} addProject={addProject} closeForm={handleFormVisible} handleFormState={handleFormState}/> : <PrimaryButton clickFunc={handleFormVisible} buttonMargin='0 auto 20px auto'>Add Project +</PrimaryButton>}
+            <PrimaryButton formOpen={showForm} clickFunc={handleFormVisible} buttonMargin='0 auto'>{showForm ? "Cancel" : "Add Project +"}</PrimaryButton>
+            <NewProjectForm formOpen={showForm} projectFormState={projectFormState} addProject={addProject} closeForm={handleFormVisible} handleFormState={handleFormState}/>
             <ProjectCardContainer>
                 {projectsArr.map((project) => {
                     return <ProjectCard key={project._id} {...project}/>
@@ -80,7 +81,7 @@ export async function getServerSideProps(context){
 
 const PageContainer = styled.div`
     width: 100%;
-    /* height: 100vh; */
+    height: fit-content;
 `;
 
 const ProjectCardContainer = styled.div`
@@ -88,4 +89,6 @@ const ProjectCardContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
     gap: 16px;
+    height: fit-content;
+    padding-bottom: 20px;
 `;
