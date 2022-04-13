@@ -69,7 +69,7 @@ const tasks = ({ tasks }) => {
     return ( 
         <PageContainer>
             <h1>tracky</h1>
-            { !showTaskForm ? <PrimaryButton clickFunc={openTaskForm}>New Task</PrimaryButton> : null }
+            <PrimaryButton clickFunc={openTaskForm}>New Task</PrimaryButton>
             { showTaskForm ? <NewTaskForm createTask={addTask} handleFormState={handleFormState} taskFormState={taskFormState} closeForm={closeForm} /> : null }
             <TaskList>
                 {taskArr.map(task => {
