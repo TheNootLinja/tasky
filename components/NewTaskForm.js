@@ -4,7 +4,7 @@ import PrimaryButton from './PrimaryButton'
 import TextInput from './TextInput.js'
 import TextArea from './TextArea'
 
-const NewTaskForm = ({ closeForm, taskFormState, handleFormState, createTask, formOpen}) => {
+const NewTaskForm = ({ taskFormState, handleFormState, createTask, formOpen}) => {
   const optionLists = [
     {
       name: "bug-list",
