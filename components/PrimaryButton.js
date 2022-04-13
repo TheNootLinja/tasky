@@ -19,6 +19,7 @@ const StyledButton = styled.button`
     border-radius: 500px;
     display: block;
     box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    transition: background-color .5s;
     @media(hover: hover) {
     :hover {
         background-color: #4323cf;

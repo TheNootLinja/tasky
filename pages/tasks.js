@@ -50,8 +50,8 @@ const tasks = ({ tasks }) => {
       setTaskFormState(defaultFormState)
     };
 
-    const openTaskForm = () => {
-      setShowTaskForm(true);
+    const handleFormVisible = () => {
+      setShowTaskForm(!showTaskForm);
     }
 
     const closeForm = () => {
@@ -69,8 +69,8 @@ const tasks = ({ tasks }) => {
     return ( 
         <PageContainer>
             <h1>tracky</h1>
-            <PrimaryButton clickFunc={openTaskForm}>New Task</PrimaryButton>
-            { showTaskForm ? <NewTaskForm createTask={addTask} handleFormState={handleFormState} taskFormState={taskFormState} closeForm={closeForm} /> : null }
+            <PrimaryButton clickFunc={handleFormVisible}>New Task</PrimaryButton>
+            <NewTaskForm formOpen={showTaskForm} createTask={addTask} handleFormState={handleFormState} taskFormState={taskFormState} closeForm={closeForm} />
             <TaskList>
                 {taskArr.map(task => {
                     return <li key={Math.random()}>{task.task_name}</li>
