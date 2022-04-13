@@ -57,7 +57,8 @@ const projects = ({projects}) => {
     return ( 
         <PageContainer>
             <h1>Projects</h1>
-            <PrimaryButton formOpen={showForm} clickFunc={handleFormVisible} buttonMargin='0 auto'>{showForm ? "Cancel" : "Add Project +"}</PrimaryButton>
+            
+            <PrimaryButton buttonColor={showForm?'#de493e':'#5E3CF5'} formOpen={showForm} clickFunc={handleFormVisible} buttonMargin='0 auto'>{showForm ? "Cancel" : "Add Project +"}</PrimaryButton>
             <NewProjectForm formOpen={showForm} projectFormState={projectFormState} addProject={addProject} closeForm={handleFormVisible} handleFormState={handleFormState}/>
             <ProjectCardContainer>
                 {projectsArr.map((project) => {
