@@ -36,16 +36,17 @@ const tasks = ({ tasks }) => {
             createdDate: new Date(),
             taskType: taskFormState.taskType,
             taskCategory: taskFormState.taskCategory,
+            taskStatus: 'Open',
         }),
       });
       const data = await res.json()
       const newTask = {
-        task_name: taskFormState.taskName,
-        task_description: taskFormState.taskDescription,
-        author_name: 'Nicholas Peters',
-        created_date: new Date(),
-        task_type: taskFormState.taskType,
-        task_category: taskFormState.taskCategory,
+        taskName: taskFormState.taskName,
+        taskDescription: taskFormState.taskDescription,
+        authorName: 'Nicholas Peters',
+        createdDate: new Date(),
+        taskType: taskFormState.taskType,
+        taskCategory: taskFormState.taskCategory,
         _id: data.taskID
       }
       setTaskArr(taskArr => [...taskArr, newTask])
@@ -70,7 +71,7 @@ const tasks = ({ tasks }) => {
 
     return ( 
         <PageContainer>
-            <StyledLink href='/projects'>Projects</StyledLink>
+            <StyledLink href='/projects'>&#60; Projects</StyledLink>
             <PrimaryButton buttonColor={showTaskForm?'#de493e':'#5E3CF5'} clickFunc={handleFormVisible}>{showTaskForm ? "Cancel" : "Add Task +"}</PrimaryButton>
             <NewTaskForm formOpen={showTaskForm} createTask={addTask} handleFormState={handleFormState} taskFormState={taskFormState} closeForm={closeForm} />
             <TaskList>
@@ -101,6 +102,9 @@ const StyledLink = styled.a`
 
 const TaskList = styled.ul`
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 `;
 
 const ProjectCardContainer = styled.div`
