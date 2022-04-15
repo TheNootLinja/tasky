@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import PrimaryButton from "../components/PrimaryButton";
 import NewTaskForm from '../components/NewTaskForm';
+import TaskCard from '../components/TaskCard';
 
 import { connectToDatabase } from '../lib/mongodb';
 
@@ -29,12 +30,12 @@ const tasks = ({ tasks }) => {
       const res = await fetch('http://localhost:3000/api/createTask', {
         method: "POST",
         body: JSON.stringify({
-            task_name: taskFormState.taskName,
-            task_description: taskFormState.taskDescription,
-            author_name: 'Nicholas Peters',
-            created_date: new Date(),
-            task_type: taskFormState.taskType,
-            task_category: taskFormState.taskCategory,
+            taskName: taskFormState.taskName,
+            taskDescription: taskFormState.taskDescription,
+            authorName: 'Nicholas Peters',
+            createdDate: new Date(),
+            taskType: taskFormState.taskType,
+            taskCategory: taskFormState.taskCategory,
         }),
       });
       const data = await res.json()
@@ -69,15 +70,15 @@ const tasks = ({ tasks }) => {
 
     return ( 
         <PageContainer>
-            {/* <Link href='/projects'>
-                <BackLink>Projects</BackLink>
-            </Link> */}
             <StyledLink href='/projects'>Projects</StyledLink>
             <PrimaryButton buttonColor={showTaskForm?'#de493e':'#5E3CF5'} clickFunc={handleFormVisible}>{showTaskForm ? "Cancel" : "Add Task +"}</PrimaryButton>
             <NewTaskForm formOpen={showTaskForm} createTask={addTask} handleFormState={handleFormState} taskFormState={taskFormState} closeForm={closeForm} />
             <TaskList>
-                {taskArr.map(task => {
+                {/* {taskArr.map(task => {
                     return <li key={Math.random()}>{task.task_name}</li>
+                })} */}
+                {taskArr.map(task => {
+                    return <TaskCard key={task._id} taskName={task.taskName}/>
                 })}
             </TaskList>
         </PageContainer>
