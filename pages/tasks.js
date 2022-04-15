@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 import PrimaryButton from "../components/PrimaryButton";
 import NewTaskForm from '../components/NewTaskForm';
@@ -68,7 +69,10 @@ const tasks = ({ tasks }) => {
 
     return ( 
         <PageContainer>
-            <h1>tracky</h1>
+            {/* <Link href='/projects'>
+                <BackLink>Projects</BackLink>
+            </Link> */}
+            <StyledLink href='/projects'>Projects</StyledLink>
             <PrimaryButton buttonColor={showTaskForm?'#de493e':'#5E3CF5'} clickFunc={handleFormVisible}>{showTaskForm ? "Cancel" : "Add Task +"}</PrimaryButton>
             <NewTaskForm formOpen={showTaskForm} createTask={addTask} handleFormState={handleFormState} taskFormState={taskFormState} closeForm={closeForm} />
             <TaskList>
@@ -84,7 +88,14 @@ export default tasks;
 
 const PageContainer = styled.div`
     width: 100%;
-    height: 100vh;
+`;
+
+const StyledLink = styled.a`
+  display: inline-block;
+  padding: 0.5rem;
+  margin: 0.5rem 1rem 0.5rem 2rem;
+  color: #5E3CF5;
+  font-weight: 600;
 `;
 
 const TaskList = styled.ul`
