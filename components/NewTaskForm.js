@@ -57,7 +57,7 @@ export default NewTaskForm;
 const NewTaskFormContainer = styled.div`
   width: 100%;
   max-width: 450px;
-  height: ${props => props.formOpen ? "460px" : "0"};
+  height: ${props => props.formOpen ? "480px" : "0"};
   overflow: hidden;
   margin: 10px auto;
   transition: height .5s;

@@ -69,7 +69,7 @@ const tasks = ({ tasks }) => {
     return ( 
         <PageContainer>
             <h1>tracky</h1>
-            <PrimaryButton clickFunc={handleFormVisible}>New Task</PrimaryButton>
+            <PrimaryButton buttonColor={showTaskForm?'#de493e':'#5E3CF5'} clickFunc={handleFormVisible}>{showTaskForm ? "Cancel" : "Add Task +"}</PrimaryButton>
             <NewTaskForm formOpen={showTaskForm} createTask={addTask} handleFormState={handleFormState} taskFormState={taskFormState} closeForm={closeForm} />
             <TaskList>
                 {taskArr.map(task => {
