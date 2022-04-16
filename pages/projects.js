@@ -33,7 +33,7 @@ const projects = ({projects}) => {
 
     const addProject = async () => {
         setShowForm(false);
-        const res = await fetch('http://localhost:3000/api/createProject', {
+        const res = await fetch('/api/createProject', {
           method: "POST",
           body: JSON.stringify({
               projectName: projectFormState.projectName,
