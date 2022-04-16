@@ -69,6 +69,25 @@ const tasks = ({ tasks }) => {
         );
     }
 
+    const deleteTask = async (e) => {
+      const selectedTaskId = e.target.dataset.key;
+      await fetch('http://localhost:3000/api/deleteTask', {
+        method: "POST",
+        body: JSON.stringify({
+          taskId: selectedTaskId,
+        }),
+      })
+      .then(res => {
+        if(res.status === 200) {
+          const filteredArr = taskArr.filter(task => task._id != selectedTaskId)
+          setTaskArr(filteredArr);
+        }
+        else {
+          alert('Something went wrong! Please try again.')
+        }
+      });
+  }
+
     return ( 
         <PageContainer>
             <StyledLink href='/projects'>&#60; Projects</StyledLink>
@@ -79,7 +98,7 @@ const tasks = ({ tasks }) => {
                     return <li key={Math.random()}>{task.task_name}</li>
                 })} */}
                 {taskArr.map(task => {
-                    return <TaskCard key={task._id} taskName={task.taskName}/>
+                    return <TaskCard key={task._id} {...task} deleteTask={deleteTask} />
                 })}
             </TaskList>
         </PageContainer>
