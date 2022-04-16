@@ -27,7 +27,7 @@ const tasks = ({ tasks }) => {
     const addTask = async () => {
       setShowTaskForm(false);
       console.log(taskFormState)
-      const res = await fetch('http://localhost:3000/api/createTask', {
+      const res = await fetch('/api/createTask', {
         method: "POST",
         body: JSON.stringify({
             taskName: taskFormState.taskName,
@@ -71,7 +71,7 @@ const tasks = ({ tasks }) => {
 
     const deleteTask = async (e) => {
       const selectedTaskId = e.target.dataset.key;
-      await fetch('http://localhost:3000/api/deleteTask', {
+      await fetch('api/deleteTask', {
         method: "POST",
         body: JSON.stringify({
           taskId: selectedTaskId,
