@@ -1,10 +1,15 @@
 import styled from 'styled-components'
+import tasks from '../pages/tasks';
 
-const TaskCard = ({taskName}) => {
+const TaskCard = ({taskName, taskStatus, _id, deleteTask}) => {
+
     return ( 
         <TaskCardContainer>
-            <TaskName>{taskName}</TaskName>
-            <DeleteIcon onClick={() => alert('Deleting Item')}>X</DeleteIcon>
+            <InfoContainer>
+                <TaskName>{taskName}</TaskName>
+                <p>{taskStatus}</p>
+            </InfoContainer>
+            <DeleteIcon data-key={_id} onClick={(e) => deleteTask(e)}>X</DeleteIcon>
         </TaskCardContainer>
      );
 }
@@ -34,6 +39,12 @@ const TaskCardContainer = styled.div`
         z-index: -1;
         box-shadow: 0 4px 20px rgba(0,0,0,.30);
     };
+`;
+
+const InfoContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 `;
 
 const TaskName = styled.p`
