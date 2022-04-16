@@ -51,6 +51,6 @@ const TaskName = styled.p`
     font-size: 1.5rem;
 `;
 
-const DeleteIcon = styled.p`
+const DeleteIcon = styled.button`
     color: red;
 `;
