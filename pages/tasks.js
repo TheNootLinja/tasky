@@ -20,13 +20,12 @@ const tasks = ({ tasks }) => {
     }
     
     const [showTaskForm, setShowTaskForm] = useState(false);
-    const [taskFormState, setTaskFormState] = useState(defaultFormState);
+    const [taskFormState, setTaskFormState] = useState({...defaultFormState});
     const [taskArr, setTaskArr] = useState(tasks);
 
     // Function that hits the endpoint for creating tasks
     const addTask = async () => {
       setShowTaskForm(false);
-      console.log(taskFormState)
       const res = await fetch('/api/createTask', {
         method: "POST",
         body: JSON.stringify({

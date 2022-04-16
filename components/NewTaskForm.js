@@ -16,10 +16,6 @@ const NewTaskForm = ({ taskFormState, handleFormState, createTask, formOpen}) =>
     },
   ];
 
-  const updateType = (e) => {
-
-  }
-
   const handleButton = () => {
     console.log('Clicked')
   }
