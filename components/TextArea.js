@@ -3,7 +3,7 @@ import styled from 'styled-components'
 const TextArea = ({ clickFunc, defVal, placHol, type }) => {
     return (
         <FieldContainer>
-            <StyledTextArea onChange={(e) => clickFunc(e, type)} placeholder={placHol} defaultValue={defVal} name="" id="" cols="30" rows="10" />
+            <StyledTextArea onChange={(e) => clickFunc(e, type)} placeholder={placHol} value={defVal} name="" id="" cols="30" rows="10" />
         </FieldContainer>
      );
 }
