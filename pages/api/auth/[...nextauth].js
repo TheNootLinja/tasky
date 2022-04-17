@@ -6,37 +6,18 @@ import ClientPromise from '../../../lib/mongodb-auth';
 export default NextAuth({
     adapter: MongoDBAdapter(ClientPromise),
     providers: [
-        GithubProvider({
-            clientId: process.env.GITHUB_ID,
-            clientSecret: process.env.GITHUB_SECRET
-        }),
-        // Providers.Email({
-        //     server: {
-        //         host: '',
-        //         port: '',
-        //         auth: {
-        //             user: '',
-        //             pass: ''
-        //         }
-        //     },
-        //     from: '',
-        // })
+      GithubProvider({
+          clientId: process.env.GITHUB_ID,
+          clientSecret: process.env.GITHUB_SECRET
+      }),
     ],
     callbacks: {
-        session: async ({ session, token }) => {
-          if (session?.user) {
-            session.user.id = token.uid;
-          }
+        session: async ({ session, user }) => {
+          session.userid = user.id;
           return session;
-        },
-        jwt: async ({ user, token }) => {
-          if (user) {
-            token.uid = user.id;
-          }
-          return token;
         },
       },
       session: {
-        strategy: 'jwt',
+        strategy: 'database',
       },
 })
