@@ -8,6 +8,7 @@ import PrimaryButton from '../components/PrimaryButton';
 export default function Home() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  console.log(session);
   return (
     <div className=''>
       <Head>
