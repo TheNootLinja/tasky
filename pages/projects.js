@@ -18,7 +18,6 @@ const projects = ({projects}) => {
             router.push('/')
         }
     })
-    console.table(session.data?.user.id);
     const defaultFormState = {
         projectName: '',
         projectDescription: '',
@@ -49,7 +48,7 @@ const projects = ({projects}) => {
           body: JSON.stringify({
               projectName: projectFormState.projectName,
               projectDescription: projectFormState.projectDescription,
-              authorId: session.data?.user.id,
+              authorId: session.data?.userid,
               authorEmail: session.data?.user.email,
               createdDate: new Date()
           }),
