@@ -14,6 +14,7 @@ export default NextAuth({
     callbacks: {
         session: async ({ session, user }) => {
           session.userid = user.id;
+          session.theme = user.preferedTheme;
           return session;
         },
       },
