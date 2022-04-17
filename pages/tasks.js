@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 import PrimaryButton from "../components/PrimaryButton";
 import NewTaskForm from '../components/NewTaskForm';
+import TaskCard from '../components/TaskCard';
 
 import { connectToDatabase } from '../lib/mongodb';
 
@@ -18,40 +20,40 @@ const tasks = ({ tasks }) => {
     }
     
     const [showTaskForm, setShowTaskForm] = useState(false);
-    const [taskFormState, setTaskFormState] = useState(defaultFormState);
+    const [taskFormState, setTaskFormState] = useState({...defaultFormState});
     const [taskArr, setTaskArr] = useState(tasks);
 
     // Function that hits the endpoint for creating tasks
     const addTask = async () => {
       setShowTaskForm(false);
-      console.log(taskFormState)
-      const res = await fetch('http://localhost:3000/api/createTask', {
+      const res = await fetch('/api/createTask', {
         method: "POST",
         body: JSON.stringify({
-            task_name: taskFormState.taskName,
-            task_description: taskFormState.taskDescription,
-            author_name: 'Nicholas Peters',
-            created_date: new Date(),
-            task_type: taskFormState.taskType,
-            task_category: taskFormState.taskCategory,
+            taskName: taskFormState.taskName,
+            taskDescription: taskFormState.taskDescription,
+            authorName: 'Nicholas Peters',
+            createdDate: new Date(),
+            taskType: taskFormState.taskType,
+            taskCategory: taskFormState.taskCategory,
+            taskStatus: 'Open',
         }),
       });
       const data = await res.json()
       const newTask = {
-        task_name: taskFormState.taskName,
-        task_description: taskFormState.taskDescription,
-        author_name: 'Nicholas Peters',
-        created_date: new Date(),
-        task_type: taskFormState.taskType,
-        task_category: taskFormState.taskCategory,
+        taskName: taskFormState.taskName,
+        taskDescription: taskFormState.taskDescription,
+        authorName: 'Nicholas Peters',
+        createdDate: new Date(),
+        taskType: taskFormState.taskType,
+        taskCategory: taskFormState.taskCategory,
         _id: data.taskID
       }
       setTaskArr(taskArr => [...taskArr, newTask])
       setTaskFormState(defaultFormState)
     };
 
-    const openTaskForm = () => {
-      setShowTaskForm(true);
+    const handleFormVisible = () => {
+      setShowTaskForm(!showTaskForm);
     }
 
     const closeForm = () => {
@@ -66,14 +68,36 @@ const tasks = ({ tasks }) => {
         );
     }
 
+    const deleteTask = async (e) => {
+      const selectedTaskId = e.target.dataset.key;
+      await fetch('api/deleteTask', {
+        method: "POST",
+        body: JSON.stringify({
+          taskId: selectedTaskId,
+        }),
+      })
+      .then(res => {
+        if(res.status === 200) {
+          const filteredArr = taskArr.filter(task => task._id != selectedTaskId)
+          setTaskArr(filteredArr);
+        }
+        else {
+          alert('Something went wrong! Please try again.')
+        }
+      });
+  }
+
     return ( 
         <PageContainer>
-            <h1>tracky</h1>
-            { !showTaskForm ? <PrimaryButton clickFunc={openTaskForm}>New Task</PrimaryButton> : null }
-            { showTaskForm ? <NewTaskForm createTask={addTask} handleFormState={handleFormState} taskFormState={taskFormState} closeForm={closeForm} /> : null }
+            <StyledLink href='/projects'>&#60; Projects</StyledLink>
+            <PrimaryButton buttonColor={showTaskForm?'#de493e':'#5E3CF5'} clickFunc={handleFormVisible}>{showTaskForm ? "Cancel" : "Add Task +"}</PrimaryButton>
+            <NewTaskForm formOpen={showTaskForm} createTask={addTask} handleFormState={handleFormState} taskFormState={taskFormState} closeForm={closeForm} />
             <TaskList>
-                {taskArr.map(task => {
+                {/* {taskArr.map(task => {
                     return <li key={Math.random()}>{task.task_name}</li>
+                })} */}
+                {taskArr.map(task => {
+                    return <TaskCard key={task._id} {...task} deleteTask={deleteTask} />
                 })}
             </TaskList>
         </PageContainer>
@@ -84,11 +108,21 @@ export default tasks;
 
 const PageContainer = styled.div`
     width: 100%;
-    height: 100vh;
+`;
+
+const StyledLink = styled.a`
+  display: inline-block;
+  padding: 0.5rem;
+  margin: 0.5rem 1rem 0.5rem 2rem;
+  color: #5E3CF5;
+  font-weight: 600;
 `;
 
 const TaskList = styled.ul`
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 `;
 
 const ProjectCardContainer = styled.div`

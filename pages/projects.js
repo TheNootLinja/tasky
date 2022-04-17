@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import { useState } from 'react'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 import { connectToDatabase } from '../lib/mongodb';
 
@@ -8,11 +10,19 @@ import ProjectCard from '../components/ProjectCard';
 import NewProjectForm from '../components/NewProjectForm';
 
 const projects = ({projects}) => {
-
+    const router = useRouter()
+    const session = useSession({
+        required: true,
+        onUnauthenticated() {
+            console.log("you're a stinky boy")
+            router.push('/')
+        }
+    })
     const defaultFormState = {
         projectName: '',
         projectDescription: '',
-        authorName: '',
+        authorId: '',
+        authorEmail: '',
         createdDate: null,
     }
 
@@ -33,12 +43,13 @@ const projects = ({projects}) => {
 
     const addProject = async () => {
         setShowForm(false);
-        const res = await fetch('http://localhost:3000/api/createProject', {
+        const res = await fetch('/api/createProject', {
           method: "POST",
           body: JSON.stringify({
               projectName: projectFormState.projectName,
               projectDescription: projectFormState.projectDescription,
-              authorName: 'Nicholas Peters',
+              authorId: session.data?.userid,
+              authorEmail: session.data?.user.email,
               createdDate: new Date()
           }),
         });
@@ -46,7 +57,8 @@ const projects = ({projects}) => {
         const newProject = {
           projectName: projectFormState.projectName,
           projectDescription: projectFormState.projectDescription,
-          authorName: 'Nicholas Peters',
+          authorId: session.data?.user.id,
+          authorEmail: session.data?.user.email,
           created_date: new Date(),
           _id: data.projectID,
         }
@@ -57,7 +69,8 @@ const projects = ({projects}) => {
     return ( 
         <PageContainer>
             <h1>Projects</h1>
-            {showForm ? <NewProjectForm projectFormState={projectFormState} addProject={addProject} closeForm={handleFormVisible} handleFormState={handleFormState}/> : <PrimaryButton clickFunc={handleFormVisible} buttonMargin='0 auto 20px auto'>Add Project +</PrimaryButton>}
+            <PrimaryButton buttonColor={showForm?'#de493e':'#5E3CF5'} formOpen={showForm} clickFunc={handleFormVisible} buttonMargin='0 auto'>{showForm ? "Cancel" : "Add Project +"}</PrimaryButton>
+            <NewProjectForm formOpen={showForm} projectFormState={projectFormState} addProject={addProject} closeForm={handleFormVisible} handleFormState={handleFormState}/>
             <ProjectCardContainer>
                 {projectsArr.map((project) => {
                     return <ProjectCard key={project._id} {...project}/>
@@ -80,7 +93,7 @@ export async function getServerSideProps(context){
 
 const PageContainer = styled.div`
     width: 100%;
-    /* height: 100vh; */
+    height: fit-content;
 `;
 
 const ProjectCardContainer = styled.div`
@@ -88,4 +101,6 @@ const ProjectCardContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
     gap: 16px;
+    height: fit-content;
+    padding-bottom: 20px;
 `;

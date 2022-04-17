@@ -4,7 +4,7 @@ import PrimaryButton from './PrimaryButton'
 import TextInput from './TextInput.js'
 import TextArea from './TextArea'
 
-const NewTaskForm = ({ closeForm, taskFormState, handleFormState, createTask}) => {
+const NewTaskForm = ({ taskFormState, handleFormState, createTask, formOpen}) => {
   const optionLists = [
     {
       name: "bug-list",
@@ -16,16 +16,12 @@ const NewTaskForm = ({ closeForm, taskFormState, handleFormState, createTask}) =
     },
   ];
 
-  const updateType = (e) => {
-
-  }
-
   const handleButton = () => {
     console.log('Clicked')
   }
 
     return ( 
-        <NewTaskFormContainer>
+        <NewTaskFormContainer formOpen={formOpen}>
           <Form>
             <TextInput clickFunc={handleFormState} defVal={taskFormState.taskName} type="taskName" placHol={"Task Name"}/>
             <TextArea clickFunc={handleFormState} defVal={taskFormState.taskDescription} type="taskDescription" placHol={"Task Description"} id="tasl-description"/>
@@ -44,11 +40,10 @@ const NewTaskForm = ({ closeForm, taskFormState, handleFormState, createTask}) =
                 <option value="Accessibility">Accessibility</option>
               </StyledSelect>
             </FieldContainer>
-            <ButtonContainer>
-              <PrimaryButton clickFunc={createTask}>Create</PrimaryButton>
-              <PrimaryButton clickFunc={closeForm}>Cancel</PrimaryButton>
-            </ButtonContainer>
           </Form>
+            <ButtonContainer>
+              <PrimaryButton clickFunc={createTask} buttonColor="#35d44a">Create</PrimaryButton>
+            </ButtonContainer>
         </NewTaskFormContainer>
      );
 }
@@ -56,9 +51,12 @@ const NewTaskForm = ({ closeForm, taskFormState, handleFormState, createTask}) =
 export default NewTaskForm;
 
 const NewTaskFormContainer = styled.div`
-  width: 300px;
-  height: fit-content;
+  width: 100%;
+  max-width: 450px;
+  height: ${props => props.formOpen ? "480px" : "0"};
+  overflow: hidden;
   margin: 10px auto;
+  transition: height .5s;
 `;
 
 const Form = styled.fieldset`
@@ -81,28 +79,7 @@ const FieldContainer = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   gap: 10px;
-`;
-
-const StyledLabel = styled.label`
-  width: 100%;
-  margin: auto;
-`;
-
-const StyledTextArea = styled.textarea`
-  -webkit-appearance: none;
-  background-color: #525a7c;
-  box-shadow: 0 4px 10px rgba(0,0,0,.15);
-  padding: 5px 0 0 10px;
-  height: 200px;
-  width: 100%;
-  border-radius: 5px;
-  vertical-align: top;
-  caret-color: #fff;
-  color: #ffffff;
-`;
-
-const StyledRadio = styled.input`
-margin: 10px 10px 10px 33px;
+  margin-top: 30px;
 `;
 
 const StyledSelect = styled.select`

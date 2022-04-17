@@ -43,7 +43,8 @@ const ProjectCardContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: all .5s;
+    transition: transform .5s;
+    transition: box-shadow .5s;
     &:hover{
         transform: scale(1.1);
         box-shadow: 0 7px 30px rgba(0,0,0,.2);

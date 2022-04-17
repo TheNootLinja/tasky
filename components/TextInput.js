@@ -3,7 +3,7 @@ import styled from 'styled-components'
 const TextInput = ({ clickFunc, defVal, placHol, type }) => {
     return ( 
         <FieldContainer>
-            <StyledTextInput type="text" onChange={(e) => clickFunc(e, type)} defaultValue={defVal} placeholder={placHol}/>
+            <StyledTextInput type="text" onChange={(e) => clickFunc(e, type)} value={defVal} placeholder={placHol}/>
         </FieldContainer>
      );
 }
