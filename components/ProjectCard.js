@@ -1,9 +1,13 @@
 import styled from 'styled-components'
 import Link from 'next/link';
 
+import { useAppContext } from '../context/globalState';
+
 const ProjectCard = (project) => {
+    const { selectedProjectId, setSelectedProjectId } = useAppContext();
+    console.log(selectedProjectId);
     return ( 
-        <ProjectCardContainer>
+        <ProjectCardContainer onClick={() => setSelectedProjectId(project._id)}>
             
             <InfoContainer>
                 <div>
@@ -14,7 +18,7 @@ const ProjectCard = (project) => {
                 {/* <OpenTaskText  color="red">3 Urgent Priority</OpenTaskText>
                 <OpenTaskText  color="orange">10 High Priority</OpenTaskText>
                 <OpenTaskText  color="green">25 Low Priority</OpenTaskText> */}
-                <StyledLink href='/tasks'>Tasks</StyledLink>
+                <Link href='tasks'><StyledLink>Tasks</StyledLink></Link>
                 <StyledDivider/>
                 <StyledLink href='/settings'>Project Settings</StyledLink>
             </ButtonMenu>
