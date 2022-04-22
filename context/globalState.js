@@ -3,8 +3,10 @@ import { createContext, useContext, useState } from 'react';
 const AppContext = createContext();
 
 export const ContextProvider = ({ children }) => {
+    const [ selectedProjectId, setSelectedProjectId ] = useState()
     let appState = {
-        projectId: '',
+        selectedProjectId: selectedProjectId,
+        setSelectedProjectId: setSelectedProjectId,
     }
 
     return (
@@ -15,5 +17,12 @@ export const ContextProvider = ({ children }) => {
 }
 
 export function useAppContext() {
-    return useContext(AppContext);
+        // Setting our context variable
+    const context = useContext(AppContext);
+    // Setting up error handling if useTheme is being used outside provider
+    if(context === undefined) {
+        throw new Error("useTheme must be used within a ThemeProvider");
+    }
+    // Returning our context variable
+    return context;
 }
