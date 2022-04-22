@@ -39,6 +39,7 @@ const tasks = ({ tasks }) => {
             taskType: taskFormState.taskType,
             taskCategory: taskFormState.taskCategory,
             taskStatus: 'Open',
+            projectId: selectedProjectId,
         }),
       });
       const data = await res.json()
@@ -49,6 +50,8 @@ const tasks = ({ tasks }) => {
         createdDate: new Date(),
         taskType: taskFormState.taskType,
         taskCategory: taskFormState.taskCategory,
+        taskStatus: 'Open',
+        projectId: selectedProjectId,
         _id: data.taskID
       }
       setTaskArr(taskArr => [...taskArr, newTask])
@@ -136,8 +139,9 @@ const ProjectCardContainer = styled.div`
 `;
 
 export async function getServerSideProps(context){
+  const projectId = context.query.projId;
   const { db } = await connectToDatabase();
-  const data = await db.collection('tasks').find({}).toArray();
+  const data = await db.collection('tasks').find({projectId: projectId}).toArray();
   const tasks = JSON.parse(JSON.stringify(data));
    return {
        props: { tasks }
