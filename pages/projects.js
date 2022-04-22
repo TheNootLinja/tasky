@@ -68,7 +68,7 @@ const projects = ({projects}) => {
 
     return ( 
         <PageContainer>
-            <h1>Projects</h1>
+            <PageTitle>Projects</PageTitle>
             <PrimaryButton buttonColor={showForm?'#de493e':'#5E3CF5'} formOpen={showForm} clickFunc={handleFormVisible} buttonMargin='0 auto'>{showForm ? "Cancel" : "Add Project +"}</PrimaryButton>
             <NewProjectForm formOpen={showForm} projectFormState={projectFormState} addProject={addProject} closeForm={handleFormVisible} handleFormState={handleFormState}/>
             <ProjectCardContainer>
@@ -90,6 +90,14 @@ export async function getServerSideProps(context){
          props: { projects }
      }
   }
+
+const PageTitle = styled.h1`
+  display: inline-block;
+  padding: 0.5rem;
+  margin: 0.5rem 1rem 0.5rem 2rem;
+  color: #5E3CF5;
+  font-weight: 600;
+`;  
 
 const PageContainer = styled.div`
     width: 100%;
