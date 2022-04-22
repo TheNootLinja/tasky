@@ -3,14 +3,17 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import Link from 'next/link';
 
+import { connectToDatabase } from '../lib/mongodb';
+import { useAppContext } from '../context/globalState';
+
 import PrimaryButton from "../components/PrimaryButton";
 import NewTaskForm from '../components/NewTaskForm';
 import TaskCard from '../components/TaskCard';
 
-import { connectToDatabase } from '../lib/mongodb';
 
 const tasks = ({ tasks }) => {
-
+  const { selectedProjectId } = useAppContext();
+  console.log(selectedProjectId)
     const defaultFormState = {
         taskName: '',
         taskDescription: '',
@@ -89,7 +92,7 @@ const tasks = ({ tasks }) => {
 
     return ( 
         <PageContainer>
-            <StyledLink href='/projects'>&#60; Projects</StyledLink>
+            <Link href='projects'><StyledLink>&#60; Projects</StyledLink></Link>
             <PrimaryButton buttonColor={showTaskForm?'#de493e':'#5E3CF5'} clickFunc={handleFormVisible}>{showTaskForm ? "Cancel" : "Add Task +"}</PrimaryButton>
             <NewTaskForm formOpen={showTaskForm} createTask={addTask} handleFormState={handleFormState} taskFormState={taskFormState} closeForm={closeForm} />
             <TaskList>
