@@ -25,7 +25,8 @@ const ProjectCard = (project) => {
 export default ProjectCard;
 
 const ButtonMenu = styled.div`
-    background-color: #ccc;
+    background-color: #fff;
+    border-left: 1px solid rgba(0,0,0,0.2);
     height: 100%;
     width: 0;
     opacity: 0;
