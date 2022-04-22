@@ -41,7 +41,6 @@ const ButtonMenu = styled.div`
     justify-content: space-evenly;
     align-items: center;
     overflow: hidden;
-    
 `;
 
 const StyledDivider = styled.div`
@@ -52,7 +51,8 @@ const StyledDivider = styled.div`
 
 const ProjectCardContainer = styled.div`
     height: 100px;
-    width: 325px;
+    width: 90%;
+    max-width: 450px;
     margin: auto;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0,0,0,.30);
@@ -86,7 +86,7 @@ const InfoContainer = styled.div`
     padding: 10px 15px;
     display: flex;
     justify-content: space-between;
-    width:175px;
+    width:50%;
 `;
 
 const ProjectName =  styled.h3`
