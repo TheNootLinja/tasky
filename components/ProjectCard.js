@@ -18,7 +18,7 @@ const ProjectCard = (project) => {
                 {/* <OpenTaskText  color="red">3 Urgent Priority</OpenTaskText>
                 <OpenTaskText  color="orange">10 High Priority</OpenTaskText>
                 <OpenTaskText  color="green">25 Low Priority</OpenTaskText> */}
-                <Link href='tasks'><StyledLink>Tasks</StyledLink></Link>
+                <Link href={`tasks?projId=${project._id}`}><StyledLink>Tasks</StyledLink></Link>
                 <StyledDivider/>
                 <StyledLink href='/settings'>Project Settings</StyledLink>
             </ButtonMenu>
