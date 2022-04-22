@@ -10,7 +10,7 @@ import ProjectCard from '../components/ProjectCard';
 import NewProjectForm from '../components/NewProjectForm';
 
 const projects = ({projects}) => {
-    const router = useRouter()
+    const router = useRouter();
     const session = useSession({
         required: true,
         onUnauthenticated() {
