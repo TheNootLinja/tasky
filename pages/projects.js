@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
+import { getSession } from "next-auth/react"
 import { useRouter } from 'next/router'
 
 import { connectToDatabase } from '../lib/mongodb';
@@ -82,8 +83,10 @@ const projects = ({projects}) => {
 export default projects;
 
 export async function getServerSideProps(context){
+    const session = await getSession(context);
+    const userId = session.userid;
     const { db } = await connectToDatabase();
-    const data = await db.collection('projects').find({}).toArray();
+    const data = await db.collection('projects').find({authorId: userId}).toArray();
     const projects = JSON.parse(JSON.stringify(data));
      return {
          props: { projects }
