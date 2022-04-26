@@ -39,6 +39,9 @@ export default function Home() {
 const StyledImage = styled.img`
   width: 100%;
   margin-bottom: 30px;
+  @media screen and (min-width: 900px) {
+    display: none;
+  }
 `;
 
 const StyledH1 = styled.h1`
@@ -54,6 +57,7 @@ const StyledMain = styled.main`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100%;
 `;
 
 const AuthStatus = styled.p`
