@@ -5,7 +5,6 @@ import { useAppContext } from '../context/globalState';
 
 const ProjectCard = (project) => {
     const { selectedProjectId, setSelectedProjectId } = useAppContext();
-    console.log(selectedProjectId);
     return ( 
         <ProjectCardContainer onClick={() => setSelectedProjectId(project._id)}>
             
@@ -20,7 +19,7 @@ const ProjectCard = (project) => {
                 <OpenTaskText  color="green">25 Low Priority</OpenTaskText> */}
                 <Link href={`tasks?projId=${project._id}`}><StyledLink>Tasks</StyledLink></Link>
                 <StyledDivider/>
-                <StyledLink href='/settings'>Project Settings</StyledLink>
+                <Link href='/project-settings'><StyledLink>Settings</StyledLink></Link>
             </ButtonMenu>
         </ProjectCardContainer>
      );

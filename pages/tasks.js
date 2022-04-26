@@ -13,7 +13,6 @@ import TaskCard from '../components/TaskCard';
 
 const tasks = ({ tasks }) => {
   const { selectedProjectId } = useAppContext();
-  console.log(selectedProjectId)
     const defaultFormState = {
         taskName: '',
         taskDescription: '',

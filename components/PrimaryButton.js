@@ -10,6 +10,7 @@ export default PrimaryButton;
 
 const StyledButton = styled.button`
     /* background-color: #5E3CF5; */
+    border: none;
     background-color: ${props => props.buttonColor};
     color: white;
     height: 3.5rem;

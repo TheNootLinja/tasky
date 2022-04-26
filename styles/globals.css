@@ -1,3 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+* {
+    font-family: "open sans";
+    margin: 0;
+    padding: 0;
+}
