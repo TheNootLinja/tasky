@@ -3,14 +3,17 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import Link from 'next/link';
 
+import { connectToDatabase } from '../lib/mongodb';
+import { useAppContext } from '../context/globalState';
+
 import PrimaryButton from "../components/PrimaryButton";
 import NewTaskForm from '../components/NewTaskForm';
 import TaskCard from '../components/TaskCard';
 
-import { connectToDatabase } from '../lib/mongodb';
 
 const tasks = ({ tasks }) => {
-
+  const { selectedProjectId } = useAppContext();
+  console.log(selectedProjectId)
     const defaultFormState = {
         taskName: '',
         taskDescription: '',
@@ -36,6 +39,7 @@ const tasks = ({ tasks }) => {
             taskType: taskFormState.taskType,
             taskCategory: taskFormState.taskCategory,
             taskStatus: 'Open',
+            projectId: selectedProjectId,
         }),
       });
       const data = await res.json()
@@ -46,6 +50,8 @@ const tasks = ({ tasks }) => {
         createdDate: new Date(),
         taskType: taskFormState.taskType,
         taskCategory: taskFormState.taskCategory,
+        taskStatus: 'Open',
+        projectId: selectedProjectId,
         _id: data.taskID
       }
       setTaskArr(taskArr => [...taskArr, newTask])
@@ -89,7 +95,7 @@ const tasks = ({ tasks }) => {
 
     return ( 
         <PageContainer>
-            <StyledLink href='/projects'>&#60; Projects</StyledLink>
+            <Link href='projects'><StyledLink>&#60; Projects</StyledLink></Link>
             <PrimaryButton buttonColor={showTaskForm?'#de493e':'#5E3CF5'} clickFunc={handleFormVisible}>{showTaskForm ? "Cancel" : "Add Task +"}</PrimaryButton>
             <NewTaskForm formOpen={showTaskForm} createTask={addTask} handleFormState={handleFormState} taskFormState={taskFormState} closeForm={closeForm} />
             <TaskList>
@@ -133,8 +139,9 @@ const ProjectCardContainer = styled.div`
 `;
 
 export async function getServerSideProps(context){
+  const projectId = context.query.projId;
   const { db } = await connectToDatabase();
-  const data = await db.collection('tasks').find({}).toArray();
+  const data = await db.collection('tasks').find({projectId: projectId}).toArray();
   const tasks = JSON.parse(JSON.stringify(data));
    return {
        props: { tasks }

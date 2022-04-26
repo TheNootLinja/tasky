@@ -1,26 +1,36 @@
 import styled from 'styled-components'
+import Link from 'next/link';
+
+import { useAppContext } from '../context/globalState';
 
 const ProjectCard = (project) => {
+    const { selectedProjectId, setSelectedProjectId } = useAppContext();
+    console.log(selectedProjectId);
     return ( 
-        <ProjectCardContainer>
+        <ProjectCardContainer onClick={() => setSelectedProjectId(project._id)}>
+            
             <InfoContainer>
                 <div>
                     <ProjectName>{project.projectName}</ProjectName>
                 </div>
             </InfoContainer>
-            <TestOpenButton>
-                <OpenTaskText  color="red">3 Urgent Priority</OpenTaskText>
+            <ButtonMenu>
+                {/* <OpenTaskText  color="red">3 Urgent Priority</OpenTaskText>
                 <OpenTaskText  color="orange">10 High Priority</OpenTaskText>
-                <OpenTaskText  color="green">25 Low Priority</OpenTaskText>
-            </TestOpenButton>
+                <OpenTaskText  color="green">25 Low Priority</OpenTaskText> */}
+                <Link href={`tasks?projId=${project._id}`}><StyledLink>Tasks</StyledLink></Link>
+                <StyledDivider/>
+                <StyledLink href='/settings'>Project Settings</StyledLink>
+            </ButtonMenu>
         </ProjectCardContainer>
      );
 }
  
 export default ProjectCard;
 
-const TestOpenButton = styled.div`
-    background-color: #ccc;
+const ButtonMenu = styled.div`
+    background-color: #fff;
+    border-left: 1px solid rgba(0,0,0,0.2);
     height: 100%;
     width: 0;
     opacity: 0;
@@ -33,9 +43,16 @@ const TestOpenButton = styled.div`
     overflow: hidden;
 `;
 
+const StyledDivider = styled.div`
+    height: 1px;
+    width: 95%;
+    background: rgba(0,0,0,0.2);
+`;
+
 const ProjectCardContainer = styled.div`
     height: 100px;
-    width: 325px;
+    width: 90%;
+    max-width: 450px;
     margin: auto;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0,0,0,.30);
@@ -43,23 +60,32 @@ const ProjectCardContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: transform .5s;
-    transition: box-shadow .5s;
+    transition: all .5s;
     &:hover{
-        transform: scale(1.1);
+        /* transform: scaleY(1.2); */
+        transform: scale(1.05);
         box-shadow: 0 7px 30px rgba(0,0,0,.2);
-        ${TestOpenButton}{
-            width: 150px;
+        ${ButtonMenu}{
+            width: 40%;
             opacity: 100;
         }
     }
+`;
+
+const StyledLink = styled.a`
+  display: inline-block;
+  padding: 0.5rem;
+  /* margin: 0.5rem 1rem 0.5rem 2rem; */
+  color: #5E3CF5;
+  font-weight: 600;
+  white-space: nowrap;
 `;
 
 const InfoContainer = styled.div`
     padding: 10px 15px;
     display: flex;
     justify-content: space-between;
-    width:175px;
+    width:60%;
 `;
 
 const ProjectName =  styled.h3`
