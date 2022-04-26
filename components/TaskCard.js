@@ -27,6 +27,7 @@ const TaskCardContainer = styled.div`
     max-width: 450px;
     background: #fff;  
     position: relative;
+    box-sizing: border-box;
     padding: 20px;
     &:before {
         border-radius: inherit;
@@ -53,4 +54,6 @@ const TaskName = styled.p`
 
 const DeleteIcon = styled.button`
     color: red;
+    border: none;
+    background: none;
 `;
