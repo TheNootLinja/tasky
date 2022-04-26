@@ -27,4 +27,5 @@ const StyledTextArea = styled.textarea`
   vertical-align: top;
   caret-color: #fff;
   color: #ffffff;
+  box-sizing: border-box;
 `;

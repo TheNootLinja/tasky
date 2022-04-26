@@ -26,6 +26,7 @@ const StyledTextInput = styled.input`
   padding-left: 10px;
   border-radius: 5px;
   caret-color: #fff;
+  box-sizing: border-box;
   color: #ffffff;
   ::placeholder {
     color: #b3b3b3;
