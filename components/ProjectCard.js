@@ -60,14 +60,13 @@ const ProjectCardContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: transform .5s;
-    transition: box-shadow .5s;
+    transition: all .5s;
     &:hover{
         /* transform: scaleY(1.2); */
-        transform: scale(1.1);
+        transform: scale(1.05);
         box-shadow: 0 7px 30px rgba(0,0,0,.2);
         ${ButtonMenu}{
-            width: 150px;
+            width: 40%;
             opacity: 100;
         }
     }
@@ -86,7 +85,7 @@ const InfoContainer = styled.div`
     padding: 10px 15px;
     display: flex;
     justify-content: space-between;
-    width:50%;
+    width:60%;
 `;
 
 const ProjectName =  styled.h3`
