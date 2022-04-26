@@ -37,6 +37,7 @@ const StyledForm = styled.fieldset`
   gap: 25px;
   margin: 0 auto;
   width: 300px;
+  border: none;
   :first-child {
     margin-top: 20px;
   }

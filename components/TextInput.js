@@ -16,6 +16,7 @@ const FieldContainer = styled.div`
 `;
 
 const StyledTextInput = styled.input`
+  border: none;
   background-color: #525a7c;
   box-shadow: 0 4px 10px rgba(0,0,0,.15);
   -webkit-appearance: none;
