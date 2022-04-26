@@ -14,8 +14,7 @@ const projects = ({projects}) => {
     const session = useSession({
         required: true,
         onUnauthenticated() {
-            console.log("you're a stinky boy")
-            router.push('/')
+            router.push('/');
         }
     })
     const defaultFormState = {

@@ -5,7 +5,6 @@ import { useAppContext } from '../context/globalState';
 
 const ProjectCard = (project) => {
     const { selectedProjectId, setSelectedProjectId } = useAppContext();
-    console.log(selectedProjectId);
     return ( 
         <ProjectCardContainer onClick={() => setSelectedProjectId(project._id)}>
             

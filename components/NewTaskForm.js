@@ -16,10 +16,6 @@ const NewTaskForm = ({ taskFormState, handleFormState, createTask, formOpen}) =>
     },
   ];
 
-  const handleButton = () => {
-    console.log('Clicked')
-  }
-
     return ( 
         <NewTaskFormContainer formOpen={formOpen}>
           <Form>
