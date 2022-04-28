@@ -5,16 +5,9 @@ import TextInput from './TextInput.js'
 import TextArea from './TextArea'
 
 const NewTaskForm = ({ taskFormState, handleFormState, createTask, formOpen}) => {
-  const optionLists = [
-    {
-      name: "bug-list",
-      options: [1,2,3],
-    },
-    {
-      name: "feature-list",
-      options: [4,5,6],
-    },
-  ];
+  const bugOptionList = ["Functionality", "Visual"];
+  const featureOptionList = ["Feature Option #1", "Feature Option #2", "Feature Option #3"];
+  const visualOptionList = ["Visual Option #1", "Visual Option #2", "Visual Option #3"];
 
     return ( 
         <NewTaskFormContainer formOpen={formOpen}>
@@ -25,15 +18,30 @@ const NewTaskForm = ({ taskFormState, handleFormState, createTask, formOpen}) =>
               <StyledSelect onChange={(e) => handleFormState(e, 'taskType')} name="" id="">
                 <option value="" defaultValue hidden>Select Category</option>
                 <option value="Bug">Bug</option>
-                <option value="Feature Request">Feature Request</option>
+                <option value="New Feature">New Feature</option>
+                <option value="Feature Change">Feature Change</option>
+                <option value="Visual Change">Visual Change</option>
               </StyledSelect>
             </FieldContainer>
             <FieldContainer>
               <StyledSelect onChange={(e) => handleFormState(e, 'taskCategory')} name="" id="">
                 <option value="" defaultValue hidden>Select Bug Category</option>
-                <option value="UI">UI</option>
-                <option value="Functionality">Functionality</option>
-                <option value="Accessibility">Accessibility</option>
+                {taskFormState.taskType === "Bug" ? bugOptionList.map(item => {
+                  return <option>{item}</option>
+                }) 
+                : 
+                taskFormState.taskType === "New Feature" ? featureOptionList.map(item => {
+                  return <option>{item}</option>
+                }) 
+                :
+                taskFormState.taskType === "Feature Change" ? featureOptionList.map(item => {
+                  return <option>{item}</option>
+                }) 
+                :
+                taskFormState.taskType === "Visual Change" ? visualOptionList.map(item => {
+                  return <option>{item}</option>
+                }) 
+                :  ''}
               </StyledSelect>
             </FieldContainer>
           </Form>
