@@ -5,9 +5,36 @@ import TextInput from './TextInput.js'
 import TextArea from './TextArea'
 
 const NewTaskForm = ({ taskFormState, handleFormState, createTask, formOpen}) => {
-  const bugOptionList = ["Functionality", "Visual"];
-  const featureOptionList = ["Feature Option #1", "Feature Option #2", "Feature Option #3"];
-  const visualOptionList = ["Visual Option #1", "Visual Option #2", "Visual Option #3"];
+  const bugOptionList = [
+    {
+      label: "Functionality",
+      value: "Functionality"
+    },
+    {
+      label: "Visual",
+      value: "Visual"
+    },
+  ];
+  const featureOptionList = [
+    {
+      label: "New Feature Request",
+      value: "New Feature Request"
+    },
+    {
+      label: "Feature Change Request",
+      value: "Feature Change Request"
+    },
+  ];
+  const visualOptionList = [
+    {
+      label: "Visual Modification",
+      value: "Visual Modification"
+    },
+    {
+      label: "Visual Addition",
+      value: "Visual Addition"
+    },
+  ];
 
     return ( 
         <NewTaskFormContainer formOpen={formOpen}>
@@ -16,30 +43,25 @@ const NewTaskForm = ({ taskFormState, handleFormState, createTask, formOpen}) =>
             <TextArea clickFunc={handleFormState} defVal={taskFormState.taskDescription} type="taskDescription" placHol={"Task Description"} id="tasl-description"/>
             <FieldContainer>
               <StyledSelect onChange={(e) => handleFormState(e, 'taskType')} name="" id="">
-                <option value="" defaultValue hidden>Select Category</option>
+                <option value="" defaultValue hidden>Select Task Type</option>
                 <option value="Bug">Bug</option>
-                <option value="New Feature">New Feature</option>
-                <option value="Feature Change">Feature Change</option>
-                <option value="Visual Change">Visual Change</option>
+                <option value="Feature">Feature</option>
+                <option value="Visual">Visual</option>
               </StyledSelect>
             </FieldContainer>
             <FieldContainer>
               <StyledSelect onChange={(e) => handleFormState(e, 'taskCategory')} name="" id="">
-                <option value="" defaultValue hidden>Select Bug Category</option>
+                <option value="" defaultValue hidden>{taskFormState.taskCategory}</option>
                 {taskFormState.taskType === "Bug" ? bugOptionList.map(item => {
-                  return <option>{item}</option>
+                  return <option value={item.value} key={Math.random()}>{item.label}</option>
                 }) 
                 : 
-                taskFormState.taskType === "New Feature" ? featureOptionList.map(item => {
-                  return <option>{item}</option>
-                }) 
+                taskFormState.taskType === "Feature" ? featureOptionList.map(item => {
+                  return <option value={item.value} key={Math.random()}>{item.label}</option>
+                })
                 :
-                taskFormState.taskType === "Feature Change" ? featureOptionList.map(item => {
-                  return <option>{item}</option>
-                }) 
-                :
-                taskFormState.taskType === "Visual Change" ? visualOptionList.map(item => {
-                  return <option>{item}</option>
+                taskFormState.taskType === "Visual" ? visualOptionList.map(item => {
+                  return <option value={item.value} key={Math.random()}>{item.label}</option>
                 }) 
                 :  ''}
               </StyledSelect>
