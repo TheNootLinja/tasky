@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import { useState } from 'react';
 import Link from 'next/link';
+// import { useRouter } from "next/router";
 
 import { connectToDatabase } from '../lib/mongodb';
 import { useAppContext } from '../context/globalState';
@@ -10,15 +11,15 @@ import PrimaryButton from "../components/PrimaryButton";
 import NewTaskForm from '../components/NewTaskForm';
 import TaskCard from '../components/TaskCard';
 
-
 const tasks = ({ tasks }) => {
   const { selectedProjectId } = useAppContext();
+  console.log(selectedProjectId)
     const defaultFormState = {
         taskName: '',
         taskDescription: '',
         taskAuthorName: '',
-        taskType: '',
-        taskCategory: '',
+        taskType: 'Select Task Type',
+        taskCategory: 'Select Category',
     }
     
     const [showTaskForm, setShowTaskForm] = useState(false);
@@ -67,6 +68,7 @@ const tasks = ({ tasks }) => {
     }
 
     const handleFormState = (e, type) => {
+      console.log(e.target.value);
         setTaskFormState({
             ...taskFormState,
             [type]: e.target.value}
