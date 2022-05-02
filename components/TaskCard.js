@@ -1,13 +1,30 @@
 import styled from 'styled-components'
 import tasks from '../pages/tasks';
 
-const TaskCard = ({taskName, taskStatus, _id, deleteTask}) => {
+const TaskCard = ({taskName, taskStatus, _id, deleteTask, taskPriority}) => {
+
+    const handlePriorityColor = priority => {
+        switch (priority) {
+            case "1":
+                return "red";
+            case "2":
+                return "orange";
+            case "3":
+                return "yellow";
+            case "4":
+                return "green";
+            default:
+                return "#fff"
+        }
+    }
 
     return ( 
         <TaskCardContainer>
+            <PriorityColor taskPriority={() => handlePriorityColor(taskPriority)}/>
             <InfoContainer>
                 <TaskName>{taskName}</TaskName>
                 <p>{taskStatus}</p>
+                <p>{taskPriority}</p>
             </InfoContainer>
             <DeleteIcon data-key={_id} onClick={(e) => deleteTask(e)}>X</DeleteIcon>
         </TaskCardContainer>
@@ -40,6 +57,16 @@ const TaskCardContainer = styled.div`
         z-index: -1;
         box-shadow: 0 4px 20px rgba(0,0,0,.30);
     };
+`;
+
+const PriorityColor = styled.div`
+    border-radius: 10px 10px 0 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: ${props => props.taskPriority};
+    width: 100%;
+    height: 20px;
 `;
 
 const InfoContainer = styled.div`
