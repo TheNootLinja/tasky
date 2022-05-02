@@ -66,6 +66,15 @@ const NewTaskForm = ({ taskFormState, handleFormState, createTask, formOpen}) =>
                 :  ''}
               </StyledSelect>
             </FieldContainer>
+            <FieldContainer>
+              <StyledSelect onChange={(e) => handleFormState(e, 'taskPriority')} name="" id="">
+                <option value="" defaultValue hidden>Select Priority</option>
+                <option value="1">Urgent!</option>
+                <option value="2">Important</option>
+                <option value="3">Normal</option>
+                <option value="4">Low</option>
+              </StyledSelect>
+            </FieldContainer>
           </Form>
             <ButtonContainer>
               <PrimaryButton clickFunc={createTask} buttonColor="#35d44a">Create</PrimaryButton>
@@ -79,7 +88,7 @@ export default NewTaskForm;
 const NewTaskFormContainer = styled.div`
   width: 100%;
   max-width: 450px;
-  height: ${props => props.formOpen ? "480px" : "0"};
+  height: ${props => props.formOpen ? "520px" : "0"};
   overflow: hidden;
   margin: 10px auto;
   transition: height .5s;
