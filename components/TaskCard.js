@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import tasks from '../pages/tasks';
 
-const TaskCard = ({taskName, taskStatus, _id, deleteTask, taskPriority}) => {
+const TaskCard = ({taskName, taskStatus, _id, deleteTask, taskPriority, setShowTaskInformation}) => {
 
     const handlePriorityColor = priority => {
         switch (priority) {
@@ -19,7 +19,7 @@ const TaskCard = ({taskName, taskStatus, _id, deleteTask, taskPriority}) => {
     }
 
     return ( 
-        <TaskCardContainer>
+        <TaskCardContainer onClick={() => setShowTaskInformation(true)}>
             <PriorityColor taskPriority={() => handlePriorityColor(taskPriority)}/>
             <InfoContainer>
                 <TaskName>{taskName}</TaskName>
