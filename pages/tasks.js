@@ -20,6 +20,7 @@ const tasks = ({ tasks }) => {
         taskAuthorName: '',
         taskType: 'Select Task Type',
         taskCategory: 'Select Category',
+        taskPriority: '',
     }
     
     const [showTaskForm, setShowTaskForm] = useState(false);
@@ -39,6 +40,7 @@ const tasks = ({ tasks }) => {
             taskType: taskFormState.taskType,
             taskCategory: taskFormState.taskCategory,
             taskStatus: 'Open',
+            taskPriority: taskFormState.taskPriority,
             projectId: selectedProjectId,
         }),
       });
@@ -51,6 +53,7 @@ const tasks = ({ tasks }) => {
         taskType: taskFormState.taskType,
         taskCategory: taskFormState.taskCategory,
         taskStatus: 'Open',
+        taskPriority: taskFormState.taskPriority,
         projectId: selectedProjectId,
         _id: data.taskID
       }
