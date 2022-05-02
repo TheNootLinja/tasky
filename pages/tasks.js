@@ -10,6 +10,7 @@ import { useAppContext } from '../context/globalState';
 import PrimaryButton from "../components/PrimaryButton";
 import NewTaskForm from '../components/NewTaskForm';
 import TaskCard from '../components/TaskCard';
+import TaskInformation from '../components/TaskInformation';
 
 const tasks = ({ tasks }) => {
   const { selectedProjectId } = useAppContext();
@@ -26,6 +27,7 @@ const tasks = ({ tasks }) => {
     const [showTaskForm, setShowTaskForm] = useState(false);
     const [taskFormState, setTaskFormState] = useState({...defaultFormState});
     const [taskArr, setTaskArr] = useState(tasks);
+    const [showTaskInformation, setShowTaskInformation] = useState(false);
 
     // Function that hits the endpoint for creating tasks
     const addTask = async () => {
@@ -99,6 +101,7 @@ const tasks = ({ tasks }) => {
 
     return ( 
         <PageContainer>
+          {showTaskInformation ? <TaskInformation setShowTaskInformation={setShowTaskInformation}/> : null}
             <Link href='projects'><StyledLink>&#60; Projects</StyledLink></Link>
             <PrimaryButton buttonColor={showTaskForm?'#de493e':'#5E3CF5'} clickFunc={handleFormVisible}>{showTaskForm ? "Cancel" : "Add Task +"}</PrimaryButton>
             <NewTaskForm formOpen={showTaskForm} createTask={addTask} handleFormState={handleFormState} taskFormState={taskFormState} closeForm={closeForm} />
@@ -107,7 +110,7 @@ const tasks = ({ tasks }) => {
                     return <li key={Math.random()}>{task.task_name}</li>
                 })} */}
                 {taskArr.map(task => {
-                    return <TaskCard key={task._id} {...task} deleteTask={deleteTask} />
+                    return <TaskCard key={task._id} {...task} deleteTask={deleteTask} setShowTaskInformation={setShowTaskInformation}/>
                 })}
             </TaskList>
         </PageContainer>
